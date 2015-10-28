@@ -9,7 +9,7 @@ import octoprint.plugin
 from octoprint.util import RepeatedTimer
 import flask
 import os
-from subprocess import Popen
+from subprocess import Popen, call
 import signal
 import linecache
 import psutil
@@ -102,13 +102,17 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
 
     def on_api_command(self, command, data):
     	if command == "update_firmware":
+            if os.path.isdir("/home/pi/Marlin/") is False:
+                self._logger.info("Firmware repository does not exist. Cloning...")
+                call("cd /home/pi/; git clone git@github.com:Voxel8/Marlin.git")
+
     	    try:
-                os.remove('home/pi/build_log.txt')
+                os.remove('/home/pi/Marlin/build_log')
     	    except OSError:
         		pass
-    	    f = open("/home/pi/build_log.txt", "w")
+            f = open("/home/pi/Marlin/build_log", "w")
             self._logger.info("Firmware update request has been made. Running...")
-            pro = Popen("cd /home/pi/git_repos/Marlin; ./build.sh", stdout=f, stderr=f, shell=True, preexec_fn=os.setsid)
+            pro = Popen("cd /home/pi/Marlin; git pull origin master; ./build.sh", stdout=f, stderr=f, shell=True, preexec_fn=os.setsid)
     	    self.isUpdating = True
     	    self._logger.info("Setting isUpdating to " + str(self.isUpdating))
     	    self.updatePID = pro.pid
