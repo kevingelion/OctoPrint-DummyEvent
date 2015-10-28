@@ -1,17 +1,13 @@
 # OctoPrint-FirmwareUpdate
 
-**TODO:** Describe what your plugin does.
+Update Voxel8's 3D Printer firmware via OctoPrint
 
 ## Setup
 
-Install via the bundled [Plugin Manager](https://github.com/foosel/OctoPrint/wiki/Plugin:-Plugin-Manager)
-or manually using this URL:
+Install manually via this URL:
 
     https://github.com/kevingelion/OctoPrint-FirmwareUpdate/archive/master.zip
 
-**TODO:** Describe how to install your plugin, if more needs to be done than just installing it via pip or through
-the plugin manager.
+## Requirements
 
-## Configuration
-
-**TODO:** Describe your plugin's configuration options (if any).
+Requires the Marlin repo cloned in the home directory containing Voxel8's build script.
