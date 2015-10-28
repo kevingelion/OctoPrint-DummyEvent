@@ -103,26 +103,24 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
     def on_api_command(self, command, data):
     	if command == "update_firmware":
             if not os.path.isdir("/home/pi/Marlin/"):
-                self._logger.info("Firmware repository does not exist. Cloning...")
+                self._logger.info("Firmware repository does not exist. Update cancelled.")
+                self.isUpdating = False
+                self._logger.info("Setting isUpdating to " + str(self.isUpdating))
+                self._plugin_manager.send_plugin_message(self._identifier, dict(isupdating=self.isUpdating, status="failed", reason="Firmware repository does not exist. Please clone before running update function."))
+            else:
+                try:
+                    os.remove('/home/pi/Marlin/.build_log')
+                except OSError:
+                    pass
+                f = open("/home/pi/Marlin/.build_log", "w")
+                self._logger.info("Firmware update request has been made. Running...")
+                pro = Popen("cd /home/pi/Marlin; git pull origin master; ./build.sh", stdout=f, stderr=f, shell=True, preexec_fn=os.setsid)
+                self.updatePID = pro.pid
                 self.isUpdating = True
                 self._logger.info("Setting isUpdating to " + str(self.isUpdating))
                 self._plugin_manager.send_plugin_message(self._identifier, dict(isupdating=self.isUpdating, createPopup="yes"))
-                call("cd /home/pi/; git clone git@github.com:Voxel8/Marlin.git", shell=True)
+                self.startTimer(1.0)
 
-    	    try:
-                os.remove('/home/pi/Marlin/.build_log')
-    	    except OSError:
-        		pass
-            f = open("/home/pi/Marlin/.build_log", "w")
-            self._logger.info("Firmware update request has been made. Running...")
-            pro = Popen("cd /home/pi/Marlin; git pull origin master; ./build.sh", stdout=f, stderr=f, shell=True, preexec_fn=os.setsid)
-            self.updatePID = pro.pid
-            if not self.isUpdating:
-                self.isUpdating = True
-                self._logger.info("Setting isUpdating to " + str(self.isUpdating))
-                self._plugin_manager.send_plugin_message(self._identifier, dict(isupdating=self.isUpdating, createPopup="yes"))
-    	    self.startTimer(1.0)
-    	
     	elif command == "check_is_updating":
     	    if self.isUpdating == True:
     	        self._logger.info("Setting isUpdating to " + str(self.isUpdating))
