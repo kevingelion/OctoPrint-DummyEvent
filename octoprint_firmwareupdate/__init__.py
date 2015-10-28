@@ -23,7 +23,7 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
 
     def __init__(self):
         self.isUpdating = False
-	    self._checkTimer = None
+        self._checkTimer = None
         self.updatePID = None
 
     def get_assets(self):
@@ -36,8 +36,8 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
         self._checkTimer.start()
 
     def checkStatus(self):
-	    update_result = open('/home/pi/build_log.txt').read()
-    	if 'No device matching following was found' in update_result:
+        update_result = open('/home/pi/build_log.txt').read()
+        if 'No device matching following was found' in update_result:
     	    self._logger.info("Failed update...")
             self.isUpdating = False
     	    self._plugin_manager.send_plugin_message(self._identifier, dict(isupdating=self.isUpdating, status="failed", reason="A connected device was not found."))
