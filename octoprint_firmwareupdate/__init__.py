@@ -104,7 +104,7 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
     	if command == "update_firmware":
             if os.path.isdir("/home/pi/Marlin/") is False:
                 self._logger.info("Firmware repository does not exist. Cloning...")
-                call("cd /home/pi/; git clone git@github.com:Voxel8/Marlin.git")
+                call("cd /home/pi/; git clone git@github.com:Voxel8/Marlin.git", shell=True)
 
     	    try:
                 os.remove('/home/pi/Marlin/build_log')
