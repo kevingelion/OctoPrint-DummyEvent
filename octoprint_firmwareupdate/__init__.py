@@ -136,7 +136,7 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
 
     def get_template_configs(self):
         return [
-            dict(type="sidebar", name="Firmware Update", icon="refresh", data_bind="visible: loginState.isAdmin()"),
+            dict(type="settings", name="Firmware Update", data_bind="visible: loginState.isAdmin()"),
 	    ]
 
 __plugin_name__ = "Firmware Update Plugin"
