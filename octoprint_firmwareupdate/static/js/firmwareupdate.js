@@ -147,6 +147,6 @@ $(function() {
 
   ADDITIONAL_VIEWMODELS.push([
     FirmwareUpdateViewModel, ["printerStateViewModel", "loginStateViewModel", "connectionViewModel", "settingsViewModel"],
-    ["#sidebar_plugin_firmwareupdate_wrapper"]
+    ["#settings_plugin_firmwareupdate"]
   ]);
 });
