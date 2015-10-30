@@ -6,7 +6,7 @@ Update Voxel8's 3D Printer firmware via OctoPrint
 
 Install manually via this URL:
 
-    https://github.com/kevingelion/OctoPrint-FirmwareUpdate/archive/master.zip
+    https://github.com/Voxel8/OctoPrint-FirmwareUpdate/archive/master.zip
 
 ## Requirements
 
