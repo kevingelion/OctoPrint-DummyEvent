@@ -87,10 +87,10 @@ class FirmwareUpdatePlugin(octoprint.plugin.StartupPlugin,
                 displayName="FirmwareUpdate Plugin",
                 displayVersion=self._plugin_version,
                 type="github_commit",
-                user="kevingelion",
+                user="Voxel8",
                 repo="OctoPrint-FirmwareUpdate",
                 current=self._plugin_version,
-                pip="https://github.com/kevingelion/OctoPrint-FirmwareUpdate/archive/{target_version}.zip"
+                pip="https://github.com/Voxel8/OctoPrint-FirmwareUpdate/archive/{target_version}.zip"
             )
         )
 
