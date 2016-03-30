@@ -34,10 +34,10 @@ class DummyEventPlugin(octoprint.plugin.StartupPlugin,
                 displayName="DummyEvent Plugin",
                 displayVersion=self._plugin_version,
                 type="github_commit",
-                user="Voxel8",
+                user="kevingelion",
                 repo="OctoPrint-DummyEvent",
                 current=self._plugin_version,
-                pip="https://github.com/Voxel8/OctoPrint-DummyEvent/archive/{target_version}.zip"
+                pip="https://github.com/kevingelion/OctoPrint-DummyEvent/archive/{target_version}.zip"
             )
         )
 
