@@ -27,7 +27,7 @@ plugin_author = "Kevin Murphy"
 plugin_author_email = "kevin@voxel8.co"
 
 # The plugin's homepage URL. Can be overwritten within OctoPrint's internal data via __plugin_url__ in the plugin module
-plugin_url = "https://github.com/Voxel8/OctoPrint-DummyEvent"
+plugin_url = "https://github.com/kevingelion/OctoPrint-DummyEvent"
 
 # The plugin's license. Can be overwritten within OctoPrint's internal data via __plugin_license__ in the plugin module
 plugin_license = "AGPLv3"
