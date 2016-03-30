@@ -9,7 +9,7 @@ $(function() {
         type: "POST",
         url: "/api/plugin/dummyevent",
         data: JSON.stringify({
-          command: 'dummy'
+          command: 'fire_event'
         }),
         contentType: "application/json; charset=utf-8",
         dataType: "json",

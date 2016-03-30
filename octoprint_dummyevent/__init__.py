@@ -28,6 +28,25 @@ class DummyEventPlugin(octoprint.plugin.StartupPlugin,
             "js": ["js/dummyevent.js"]
         }
 
+    def get_api_commands(self):
+        return dict(
+            fire_event=[]
+        )
+
+    def on_api_command(self, command, data):
+    	if command == "fire_event":
+            eventManager().fire(Events.DUMMY_EVENT)
+    	else:
+    	    self._logger.info("Uknown command.")
+
+    def on_api_get(self, request):
+        return flask.make_response("Not found", 404)
+
+    def get_template_configs(self):
+        return [
+            dict(type="settings", name="DummyEvent", data_bind="visible: true"),
+	    ]
+
     def get_update_information(self):
         return dict(
             dummyevent_plugin=dict(
@@ -40,25 +59,6 @@ class DummyEventPlugin(octoprint.plugin.StartupPlugin,
                 pip="https://github.com/kevingelion/OctoPrint-DummyEvent/archive/{target_version}.zip"
             )
         )
-
-    def get_api_commands(self):
-        return dict(
-            fire_event=[]
-        )
-
-    def on_api_command(self, command, data):
-    	if command == "fire_event":
-            eventManager().fire(Events.DUMMY_EVENT, response)
-    	else:
-    	    self._logger.info("Uknown command.")
-
-    def on_api_get(self, request):
-        return flask.make_response("Not found", 404)
-
-    def get_template_configs(self):
-        return [
-            dict(type="settings", name="DummyEvent", data_bind="visible: loginState.isAdmin()"),
-	    ]
 
 __plugin_name__ = "Dummy Event Plugin"
 
